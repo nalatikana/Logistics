@@ -1,0 +1,14 @@
+{
+  "name": "smart-logistics-tracking",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mobile-first logistics tracking starter for pickup, inbound, outbound, billing and dashboard workflows.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js && node --check public/mobile.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

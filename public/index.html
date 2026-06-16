@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#1d4ed8">
+    <title>SmartLogistics</title>
+    <link rel="icon" href="icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">SL</div>
+          <div>
+            <strong>SmartLogistics</strong>
+            <span>ระบบติดตามงานขนส่ง</span>
+          </div>
+        </div>
+
+        <nav class="side-nav" aria-label="Main navigation">
+          <button class="nav-item active" type="button" data-view="dashboard">
+            <span>▦</span>
+            <b>แดชบอร์ด / Dashboard</b>
+          </button>
+          <button class="nav-item" type="button" data-view="orders">
+            <span>◇</span>
+            <b>ติดตามงาน / Orders</b>
+          </button>
+          <button class="nav-item" type="button" data-view="staff">
+            <span>♙</span>
+            <b>พนักงาน / Staff</b>
+          </button>
+          <button class="nav-item" type="button" data-view="mobile">
+            <span>▤</span>
+            <b>LINE & Mobile Ops</b>
+          </button>
+          <button class="nav-item" type="button" data-view="admin">
+            <span>⚙</span>
+            <b>ระบบ / Admin</b>
+          </button>
+        </nav>
+
+        <div class="side-footer">
+          <button class="side-link" type="button">ตั้งค่า / Settings</button>
+          <button class="side-link danger-text" type="button">ออกจากระบบ / Logout</button>
+          <div class="user-card">
+            <div class="avatar">JD</div>
+            <div>
+              <strong>John Doe</strong>
+              <span>Admin Account</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <div>
+            <p id="breadcrumb">ภาพรวม / Executive</p>
+            <h1 id="pageTitle">Executive Dashboard</h1>
+          </div>
+          <div class="top-actions">
+            <label class="search-box" aria-label="Search">
+              <span>⌕</span>
+              <input id="globalSearch" placeholder="ค้นหา AWB หรือ Order... / Search AWB or Orders...">
+            </label>
+            <a class="ghost-link" href="mobile.html">Mobile App</a>
+            <button id="languageToggle" class="ghost-button" type="button">TH / EN</button>
+            <button class="icon-button" type="button" aria-label="Notifications">!</button>
+            <div class="profile-dot">JD</div>
+          </div>
+        </header>
+
+        <main class="content">
+          <section class="page active" id="view-dashboard" data-page="dashboard">
+            <div class="metric-grid">
+              <article class="metric-card">
+                <span class="icon blue">□</span>
+                <p>รับเข้า วันนี้ / Inbound Today</p>
+                <strong id="metricInbound">0</strong>
+                <em>↗ 12%</em>
+              </article>
+              <article class="metric-card">
+                <span class="icon green">▣</span>
+                <p>ส่งออก วันนี้ / Outbound Today</p>
+                <strong id="metricOutbound">0</strong>
+                <em>↗ 8%</em>
+              </article>
+              <article class="metric-card">
+                <span class="icon amber">◷</span>
+                <p>รอดำเนินการ / Pending</p>
+                <strong id="metricPendingJobs">0</strong>
+                <em class="warn">↘ 2%</em>
+              </article>
+              <article class="metric-card">
+                <span class="icon red">!</span>
+                <p>เสี่ยงเกินเวลา / Overdue</p>
+                <strong id="metricOverdue">0</strong>
+                <em>↗ 5%</em>
+              </article>
+            </div>
+
+            <div class="dashboard-grid">
+              <article class="card chart-card">
+                <div class="card-head">
+                  <div>
+                    <h2>ปริมาณงานรายวัน / Daily Order Volume</h2>
+                    <p>แนวโน้มงานรายสัปดาห์ / Weekly trend analysis</p>
+                  </div>
+                  <span class="trend">↗ +24.5%</span>
+                </div>
+                <svg class="line-chart" viewBox="0 0 720 280" role="img" aria-label="Daily order volume chart">
+                  <g class="grid-lines">
+                    <line x1="44" y1="36" x2="690" y2="36"></line>
+                    <line x1="44" y1="96" x2="690" y2="96"></line>
+                    <line x1="44" y1="156" x2="690" y2="156"></line>
+                    <line x1="44" y1="216" x2="690" y2="216"></line>
+                  </g>
+                  <path d="M48 198 C120 176, 168 150, 224 112 S336 82, 400 132 S494 62, 548 70 S622 184, 676 202" fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round"></path>
+                  <g class="axis-labels">
+                    <text x="45" y="260">Mon</text>
+                    <text x="152" y="260">Tue</text>
+                    <text x="260" y="260">Wed</text>
+                    <text x="370" y="260">Thu</text>
+                    <text x="478" y="260">Fri</text>
+                    <text x="586" y="260">Sat</text>
+                    <text x="676" y="260">Sun</text>
+                  </g>
+                </svg>
+              </article>
+
+              <article class="card status-card">
+                <div class="card-head">
+                  <div>
+                    <h2>สัดส่วนสถานะ / Status Distribution</h2>
+                    <p>สุขภาพงานปัจจุบัน / Current network health</p>
+                  </div>
+                </div>
+                <div class="donut" aria-hidden="true"></div>
+                <div class="legend">
+                  <span><i class="blue-dot"></i>Inbound</span>
+                  <span><i class="purple-dot"></i>Storage</span>
+                  <span><i class="gray-dot"></i>Prep</span>
+                  <span><i class="amber-dot"></i>Customs</span>
+                  <span><i class="green-dot"></i>Final</span>
+                </div>
+              </article>
+            </div>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h2>งานล่าสุด / Recent Orders</h2>
+                  <p>ติดตามงานขนส่งแบบ real-time / Real-time logistics monitoring</p>
+                </div>
+                <div class="button-pair">
+                  <button class="ghost-button" type="button">Export PDF</button>
+                  <button class="primary-button" type="button" data-view-jump="orders">ดูงานทั้งหมด / View All</button>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>AWB / House</th>
+                      <th>สถานะ / Step</th>
+                      <th>ลูกค้า / Customer</th>
+                      <th>Flight</th>
+                      <th>Lead Time</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentOrdersTable"></tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h2>แจ้งเตือนไฟล์บิน / Flight Update Feed</h2>
+                  <p>งานใหม่ งานเปลี่ยน และงานที่ยังไม่ออกใบ / New, changed and not-issued jobs</p>
+                </div>
+              </div>
+              <div id="importChangeList" class="change-list"></div>
+            </article>
+          </section>
+
+          <section class="page" id="view-orders" data-page="orders">
+            <div class="orders-layout">
+              <aside class="orders-list card">
+                <label class="search-box full">
+                  <span>⌕</span>
+                  <input id="orderSearch" placeholder="ค้นหา AWB / Search order">
+                </label>
+                <div class="segmented">
+                  <button class="active" type="button">Today</button>
+                  <button type="button">Pending</button>
+                  <button type="button">Overdue</button>
+                  <button type="button">All</button>
+                </div>
+                <div id="orderCards" class="order-cards"></div>
+              </aside>
+
+              <section class="tracking-detail">
+                <article class="card shipment-hero">
+                  <div class="hero-icon">✈</div>
+                  <div>
+                    <h2 id="selectedOrderTitle">H-1001</h2>
+                    <p id="selectedOrderSubtitle">Flight / Customer</p>
+                  </div>
+                  <div class="route-box">
+                    <span>ORIGIN<br><b id="routeOrigin">WH3</b></span>
+                    <span>→</span>
+                    <span>DEST<br><b id="routeDest">TG/BFS</b></span>
+                    <span>WEIGHT<br><b id="routeWeight">25.5kg</b></span>
+                  </div>
+                </article>
+
+                <div class="detail-grid">
+                  <article class="card timeline-card">
+                    <div class="card-head">
+                      <h2>ไทม์ไลน์ปฏิบัติการ / Operational Timeline</h2>
+                      <span class="live">LIVE UPDATE</span>
+                    </div>
+                    <div id="timelineList" class="timeline-list"></div>
+                  </article>
+
+                  <aside class="side-stack">
+                    <article class="card">
+                      <h2>รายละเอียด / Shipment Details</h2>
+                      <div id="cargoIssueBanner" class="cargo-issue-banner">
+                        <div>
+                          <strong>ยังไม่ออกใบ Cargo</strong>
+                          <span>งานนี้มาจากไฟล์แล้ว ต้องออกใบก่อนส่งให้คนขับ / Issue Cargo form before dispatch.</span>
+                        </div>
+                        <button id="issueCargoBtn" type="button">ออกใบ Cargo</button>
+                      </div>
+                      <dl class="details-list">
+                        <dt>Service Type</dt><dd>Express Cargo</dd>
+                        <dt>Hazardous</dt><dd id="hazardInfo">No</dd>
+                        <dt>Handling</dt><dd>Fragile, Keep Dry</dd>
+                        <dt>Pickup Case</dt><dd id="pickupCaseInfo">-</dd>
+                        <dt>Cargo Form</dt><dd id="cargoIssuedInfo">Not issued</dd>
+                        <dt>Destination</dt><dd id="destinationInfo">-</dd>
+                        <dt>Driver</dt><dd id="driverInfo">-</dd>
+                        <dt>Pieces</dt><dd id="piecesInfo">-</dd>
+                        <dt>House Rows</dt><dd id="pickupItemsInfo">-</dd>
+                        <dt>Package</dt><dd id="packageInfo">-</dd>
+                        <dt>Sticker</dt><dd id="stickerInfo">-</dd>
+                      </dl>
+                    </article>
+                    <article class="card evidence-card">
+                      <h2>หลักฐาน / Evidence Gallery</h2>
+                      <div class="evidence-grid">
+                        <button type="button">รูปสินค้า<br>Product</button>
+                        <button type="button">น้ำหนัก<br>Weight</button>
+                        <button type="button">เอกสาร<br>Docs</button>
+                        <button type="button">ซีล<br>Seal</button>
+                      </div>
+                    </article>
+                  </aside>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section class="page" id="view-staff" data-page="staff">
+            <div class="metric-grid">
+              <article class="metric-card"><span class="icon blue">♙</span><p>พนักงานทั้งหมด / Total Staff</p><strong id="staffTotal">0</strong></article>
+              <article class="metric-card"><span class="icon purple">◌</span><p>ประสิทธิภาพเฉลี่ย / Avg Performance</p><strong>94.2%</strong><em>↗ 2.4%</em></article>
+              <article class="metric-card"><span class="icon green">▤</span><p>LINE Connected</p><strong>4</strong></article>
+              <article class="metric-card"><span class="icon blue">↗</span><p>System Uptime</p><strong>99.9%</strong></article>
+            </div>
+            <div class="staff-layout">
+              <article class="card">
+                <div class="card-head">
+                  <h2>จัดการพนักงาน / Staff Management</h2>
+                  <button class="primary-button" type="button">เพิ่มพนักงาน / Add Staff</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Code</th><th>Name</th><th>Section</th><th>LINE</th><th>KPI</th><th>Action</th></tr></thead>
+                    <tbody id="staffTable"></tbody>
+                  </table>
+                </div>
+              </article>
+              <aside class="side-stack">
+                <article class="card staff-detail">
+                  <div class="large-avatar">S</div>
+                  <h2>Somchai Prasert</h2>
+                  <p>Import Staff · EMP001</p>
+                </article>
+                <article class="metric-card"><span class="icon green">✓</span><p>สำเร็จ 24 ชม. / Completed</p><strong>45</strong><em>↗ 12%</em></article>
+                <article class="metric-card"><span class="icon red">!</span><p>อัตราผิดพลาด / Avg Error Rate</p><strong>0.5%</strong><em class="warn">↘ 0.2%</em></article>
+              </aside>
+            </div>
+          </section>
+
+          <section class="page" id="view-mobile" data-page="mobile">
+            <div class="mobile-preview-grid">
+              <article class="phone-frame">
+                <h2>Main Menu</h2>
+                <div class="phone">
+                  <div class="line-head">SmartLogistics Bot<br><small>Official Account</small></div>
+                  <div class="chat-bubble bot">Welcome back. เลือกงานที่ต้องการเริ่ม / Choose an operation.</div>
+                  <div class="quick-menu">
+                    <button type="button">Inbound<br>Receive</button>
+                    <button type="button">Outbound<br>Process</button>
+                    <button type="button">Search<br>Order</button>
+                    <button type="button">My KPI</button>
+                  </div>
+                </div>
+              </article>
+              <article class="phone-frame">
+                <h2>Inbound Flow</h2>
+                <div class="phone">
+                  <div class="line-head">SmartLogistics Bot<br><small>Official Account</small></div>
+                  <div class="chat-bubble bot">สแกน Master AWB / Please scan barcode.</div>
+                  <div class="chat-bubble user">297-73131343</div>
+                  <div class="chat-bubble bot">พบ AWB แล้ว กรุณาถ่ายรูป Label / Upload Product Label.</div>
+                  <button class="camera-pill" type="button">เปิดกล้อง / Open Camera</button>
+                </div>
+              </article>
+              <article class="phone-frame">
+                <h2>Outbound Flow</h2>
+                <div class="phone">
+                  <div class="line-head">SmartLogistics Bot<br><small>Official Account</small></div>
+                  <div class="chat-bubble bot">Step 1/5: ใส่น้ำหนักสินค้า / Enter shipment weight.</div>
+                  <div class="chat-bubble user">25.50kg</div>
+                  <div class="chat-bubble bot">บันทึกแล้ว กรุณาอัปโหลดรูปบนตาชั่ง / Upload scale photo.</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="operations-grid">
+              <section class="panel" id="driverPanel" data-role-panel="Driver">
+                <div class="panel-title"><h2>Pickup</h2><span>Driver mobile workflow</span></div>
+                <label>วันที่ / Pickup Date</label>
+                <input id="driverPickupDate" type="date">
+                <label>ใบงาน / Assigned Job</label>
+                <select id="driverJobSelect"></select>
+                <input id="driverHouse" type="hidden" value="H-1001">
+                <label>ลูกค้า / Customer</label>
+                <input id="driverCustomerName" autocomplete="off" placeholder="ชื่อลูกค้า / Customer name">
+                <label>ทะเบียนรถ / Truck License</label>
+                <input id="driverVehiclePlate" autocomplete="off" placeholder="เช่น 70-3472">
+                <label>สถานที่เริ่มต้น / Start Place</label>
+                <input id="driverStartPlace" autocomplete="off" placeholder="คลังลูกค้า / Customer warehouse">
+                <p class="step-note">1) กดเช็คอินก่อน แล้วค่อยกรอกฟอร์ม/แนบรูป / Check in first, then fill form and attach photos.</p>
+                <button id="checkInBtn" type="button" class="checkin-button">เช็คอิน / Check-in</button>
+                <label>จำนวนสินค้า / Piece Count</label>
+                <input id="driverPieceCount" type="number" inputmode="numeric" placeholder="จำนวนกล่อง/ชิ้น">
+                <div class="field-head">
+                  <label>รายการงาน / Jobs</label>
+                  <button id="addDriverPickupItem" type="button" class="mini-add">+ เพิ่มงาน</button>
+                </div>
+                <div id="driverPickupItemRows" class="job-row-list"></div>
+                <textarea id="driverPickupItems" hidden></textarea>
+                <label>ประเภทการแพ็ค / Package Type</label>
+                <select id="driverPackageType">
+                  <option value="Carton">กล่อง / Carton</option>
+                  <option value="Bundle">มัด / Bundle</option>
+                  <option value="Pallet">พาเลท / Pallet</option>
+                  <option value="Mixed">ผสม / Mixed</option>
+                </select>
+                <label>ปลายทาง / Destination</label>
+                <select id="driverDestination">
+                  <option value="WH3">WH3</option>
+                  <option value="TG">TG</option>
+                  <option value="TGINT">TGINT</option>
+                  <option value="BFS">BFS</option>
+                </select>
+                <label>ผู้ตรวจสอบ / Inspector</label>
+                <input id="driverInspectorName" autocomplete="off" placeholder="ชื่อผู้ตรวจสอบ">
+                <label>เจ้าหน้าที่รับของ / Receiver</label>
+                <input id="driverReceiverName" autocomplete="off" placeholder="ชื่อผู้รับของ">
+                <label>สถานที่สิ้นสุด / End Place</label>
+                <select id="driverEndPlace">
+                  <option value="WH3">WH3</option>
+                  <option value="TG">TG</option>
+                  <option value="TGINT">TGINT</option>
+                  <option value="BFS">BFS</option>
+                  <option value="Customer">คลังลูกค้า / Customer</option>
+                </select>
+                <label>รูปสินค้า / Product Photos (แนบได้หลายรูป)</label>
+                <input id="productImages" type="file" accept="image/*" capture="environment" multiple>
+                <label>รูปใบ Cargo / Cargo Form Photos (แนบได้หลายรูป)</label>
+                <input id="cargoImages" type="file" accept="image/*" capture="environment" multiple>
+                <canvas id="signaturePad" width="680" height="220"></canvas>
+                <div class="button-row">
+                  <button id="clearSignature" type="button" class="secondary">ล้างลายเซ็น</button>
+                  <button id="completePickupBtn" type="button">จบงาน / Check-out</button>
+                </div>
+              </section>
+
+              <section class="panel" id="whPanel" data-role-panel="WH_Staff">
+                <div class="panel-title"><h2>Inbound WH3</h2><span>Twin scanning</span></div>
+                <label>House Number</label>
+                <input id="scanHouse" inputmode="text" autocomplete="off" value="H-1001">
+                <label>Location ID</label>
+                <input id="scanLocation" inputmode="text" autocomplete="off" value="A-01">
+                <button id="twinScanBtn" type="button">ล็อกตำแหน่ง</button>
+                <div id="locationList" class="location-list"></div>
+              </section>
+
+              <section class="panel" id="terminalPanel" data-role-panel="Terminal">
+                <div class="panel-title"><h2>Outbound Terminal</h2><span>Validation & X-Ray</span></div>
+                <label>House Number</label>
+                <input id="terminalHouse" autocomplete="off" value="H-1001">
+                <label id="lithiumDocLabel">เอกสารลิเธียม / Permit</label>
+                <input id="lithiumDoc" type="file" accept="image/*,application/pdf" capture="environment">
+                <div class="button-row">
+                  <button id="validateDocBtn" type="button">ตรวจเอกสาร</button>
+                  <button id="xrayPassedBtn" type="button">X-Ray ผ่าน</button>
+                  <button id="rescanBtn" type="button" class="danger">Re-X-Ray</button>
+                </div>
+                <label>รูป Loading Detail</label>
+                <input id="loadingImage" type="file" accept="image/*" capture="environment">
+                <button id="loadingBtn" type="button">อัปโหลด Loading Detail</button>
+              </section>
+
+              <section class="panel" id="billingPanel" data-role-panel="Billing">
+                <div class="panel-title"><h2>Billing</h2><span>Invoice workflow</span></div>
+                <label>House Number</label>
+                <input id="billingHouse" autocomplete="off" value="H-1001">
+                <button id="generateBillBtn" type="button">สร้างใบแจ้งหนี้</button>
+                <label>Invoice ID</label>
+                <input id="invoiceId" autocomplete="off" placeholder="INV-2026-0001">
+                <button id="sendInvoiceBtn" type="button" class="secondary">ส่งอีเมลวางบิล</button>
+                <div id="billingResult" class="result"></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="page" id="view-admin" data-page="admin">
+            <div class="admin-layout">
+              <section class="panel">
+                <div class="panel-title"><h2>เปิดใบงาน / Create Job</h2><span>Admin control</span></div>
+                <label>House Number</label>
+                <input id="adminHouse" autocomplete="off" value="H-2001">
+                <label>Customer</label>
+                <select id="adminCustomer">
+                  <option value="c_wd">WD Export Co., Ltd.</option>
+                  <option value="c_general">General Air Cargo</option>
+                </select>
+                <label>ประเภทใบงาน / Pickup Case</label>
+                <select id="adminPickupCase">
+                  <option value="SpecialMD">กรณีที่ 1: งานพิเศษ/MD - รับฟอร์มจาก WH3</option>
+                  <option value="GeneralManual">กรณีที่ 2: งานทั่วไป - คนขับเขียนเอง</option>
+                </select>
+                <label>วันที่รับสินค้า / Pickup Date</label>
+                <input id="adminPickupDate" type="date">
+                <label>สถานที่รับสินค้า / Pickup Location</label>
+                <input id="adminPickupLocation" autocomplete="off" placeholder="คลังลูกค้า / Customer warehouse">
+                <label>ชื่อคนขับ / Driver Name</label>
+                <input id="adminDriverName" autocomplete="off" value="คนขับ A">
+                <label>ทะเบียนรถ / Vehicle Plate</label>
+                <input id="adminVehiclePlate" autocomplete="off" placeholder="เช่น 70-1234">
+                <label>จำนวนสินค้า / Piece Count</label>
+                <input id="adminPieceCount" type="number" inputmode="numeric" placeholder="จำนวนกล่อง/ชิ้น">
+                <label>รายการ House หลายงาน / Multiple House rows</label>
+                <textarea id="adminPickupItems" rows="5" placeholder="รูปแบบ: House,Destination,Carton&#10;4840779189,TGINT,1M&#10;4840779188,TGINT,1M"></textarea>
+                <label>ประเภทการแพ็ค / Package Type</label>
+                <select id="adminPackageType">
+                  <option value="Carton">กล่อง / Carton</option>
+                  <option value="Bundle">มัด / Bundle</option>
+                  <option value="Pallet">พาเลท / Pallet</option>
+                  <option value="Mixed">ผสม / Mixed</option>
+                </select>
+                <label>Destination Routing</label>
+                <select id="adminDestination">
+                  <option value="WH3">เข้าคลัง WH3</option>
+                  <option value="TG">ส่งออก TG</option>
+                  <option value="TGINT">ส่งออก TGINT</option>
+                  <option value="BFS">ส่งออก BFS</option>
+                </select>
+                <label>สี Sticker (ถ้ามี) / Sticker Color</label>
+                <input id="adminStickerColor" autocomplete="off" placeholder="เช่น แดง/เหลือง/เขียว">
+                <label>Flight No.</label>
+                <input id="adminFlightNo" autocomplete="off" value="TG642">
+                <label>Flight Time</label>
+                <input id="adminFlightTime" type="datetime-local">
+                <label>Product Type</label>
+                <select id="adminProductType">
+                  <option value="General">General</option>
+                  <option value="Lithium">Lithium</option>
+                  <option value="WD">WD Special</option>
+                </select>
+                <label>Route</label>
+                <select id="adminRouteType">
+                  <option value="WH3">WH3</option>
+                  <option value="CrossDock">Cross-Dock</option>
+                  <option value="TG">TG</option>
+                  <option value="BFS">BFS</option>
+                </select>
+                <label>Amount</label>
+                <input id="adminAmount" type="number" inputmode="decimal" value="9500">
+                <div class="button-row two">
+                  <button id="previewCargoBtn" type="button" class="secondary">Preview ใบงาน</button>
+                  <button id="createJobBtn" type="button">เปิดใบงาน / Create Job</button>
+                </div>
+              </section>
+
+              <section class="panel">
+                <div class="panel-title"><h2>Flight Feed Import</h2><span>Email parser mock</span></div>
+                <label>SCD Pickup Report CSV</label>
+                <input id="scdCsvFile" type="file" accept=".csv,text/csv">
+                <button id="importScdBtn" type="button">Import SCD Pickup CSV</button>
+                <textarea id="flightCsv" rows="8" spellcheck="false">house_number,customer_id,flight_no,flight_time,product_type,route_type,amount
+H-3001,c_wd,TG640,2026-06-15T18:00:00,Lithium,WH3,12000
+H-3002,c_general,TG640,2026-06-15T18:00:00,General,CrossDock,7800</textarea>
+                <button id="importFlightBtn" type="button" class="secondary">Import งานจาก Email/CSV</button>
+                <h3>Flight Update Feed</h3>
+                <div id="adminImportChangeList" class="change-list"></div>
+                <h3>Alerts</h3>
+                <div id="alertList" class="alert-list"></div>
+                <h3>Invoices</h3>
+                <div id="invoiceList" class="invoice-list"></div>
+              </section>
+
+              <section class="panel preview-panel">
+                <div class="panel-title">
+                  <h2>Preview Cargo Pickup Form</h2>
+                  <button id="printCargoPreviewBtn" type="button" class="secondary">พิมพ์ / Print</button>
+                </div>
+                <div id="cargoPreview" class="cargo-preview"></div>
+              </section>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

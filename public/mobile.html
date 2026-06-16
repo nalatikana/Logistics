@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#06c755">
+    <title>SmartLogistics Mobile</title>
+    <link rel="icon" href="icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="mobile.css">
+  </head>
+  <body>
+    <header class="mobile-header">
+      <div>
+        <strong>SmartLogistics Bot</strong>
+        <span>Mobile Staff Operations / งานพนักงานภาคสนาม</span>
+      </div>
+      <a href="index.html">Web</a>
+    </header>
+
+    <main>
+      <section class="hero-card">
+        <p>เลือกงานที่ต้องการทำ / Choose operation</p>
+        <h1>LINE-style Mobile App</h1>
+        <div class="status-strip">
+          <span><b id="mobileOpenJobs">0</b> งานเปิด / Open</span>
+          <span><b id="mobileBillingJobs">0</b> รอวางบิล / Billing</span>
+        </div>
+      </section>
+
+      <nav class="action-grid" aria-label="Mobile actions">
+        <button class="action-card active" type="button" data-mobile-tab="pickup">
+          <span>📦</span>
+          <b>Pickup</b>
+          <small>รับสินค้า / Driver</small>
+        </button>
+        <button class="action-card" type="button" data-mobile-tab="inbound">
+          <span>⌗</span>
+          <b>Inbound</b>
+          <small>สแกนเข้าคลัง / WH3</small>
+        </button>
+        <button class="action-card" type="button" data-mobile-tab="outbound">
+          <span>✈</span>
+          <b>Outbound</b>
+          <small>Terminal / X-Ray</small>
+        </button>
+        <button class="action-card" type="button" data-mobile-tab="billing">
+          <span>฿</span>
+          <b>Billing</b>
+          <small>วางบิล / Invoice</small>
+        </button>
+      </nav>
+
+      <section class="mobile-panel active" id="tab-pickup">
+        <div class="bot-row">
+          <div class="bot-avatar">SL</div>
+          <div class="bubble">กรอก House แล้วกดเช็คอิน ระบบจะเก็บเวลาและ GPS / Enter House and check in.</div>
+        </div>
+        <label>วันที่ / Pickup Date</label>
+        <input id="driverPickupDate" type="date">
+        <label>ใบงาน / Assigned Job</label>
+        <select id="driverJobSelect"></select>
+        <input id="driverHouse" type="hidden" value="H-1001">
+        <label>ลูกค้า / Customer</label>
+        <input id="driverCustomerName" autocomplete="off" placeholder="ชื่อลูกค้า / Customer name">
+        <label>ทะเบียนรถ / Truck License</label>
+        <input id="driverVehiclePlate" autocomplete="off" placeholder="เช่น 70-3472">
+        <label>สถานที่เริ่มต้น / Start Place</label>
+        <input id="driverStartPlace" autocomplete="off" placeholder="คลังลูกค้า / Customer warehouse">
+        <p class="step-note">1) กดเช็คอินก่อนเริ่มงาน / Check in before filling the form.</p>
+        <button id="checkInBtn" type="button" class="checkin-button">เช็คอิน / Check-in</button>
+        <label>จำนวนสินค้า / Piece Count</label>
+        <input id="driverPieceCount" type="number" inputmode="numeric" placeholder="จำนวนกล่อง/ชิ้น">
+        <div class="field-head">
+          <label>รายการงาน / Jobs</label>
+          <button id="addDriverPickupItem" type="button" class="mini-add">+ เพิ่มงาน</button>
+        </div>
+        <div id="driverPickupItemRows" class="job-row-list"></div>
+        <textarea id="driverPickupItems" hidden></textarea>
+        <label>ประเภทการแพ็ค / Package Type</label>
+        <select id="driverPackageType">
+          <option value="Carton">กล่อง / Carton</option>
+          <option value="Bundle">มัด / Bundle</option>
+          <option value="Pallet">พาเลท / Pallet</option>
+          <option value="Mixed">ผสม / Mixed</option>
+        </select>
+        <label>ปลายทาง / Destination</label>
+        <select id="driverDestination">
+          <option value="WH3">WH3</option>
+          <option value="TG">TG</option>
+          <option value="TGINT">TGINT</option>
+          <option value="BFS">BFS</option>
+        </select>
+        <label>ผู้ตรวจสอบ / Inspector</label>
+        <input id="driverInspectorName" autocomplete="off" placeholder="ชื่อผู้ตรวจสอบ">
+        <label>เจ้าหน้าที่รับของ / Receiver</label>
+        <input id="driverReceiverName" autocomplete="off" placeholder="ชื่อผู้รับของ">
+        <label>สถานที่สิ้นสุด / End Place</label>
+        <select id="driverEndPlace">
+          <option value="WH3">WH3</option>
+          <option value="TG">TG</option>
+          <option value="TGINT">TGINT</option>
+          <option value="BFS">BFS</option>
+          <option value="Customer">คลังลูกค้า / Customer</option>
+        </select>
+        <label>รูปสินค้า / Product Photos (แนบได้หลายรูป)</label>
+        <input id="productImages" type="file" accept="image/*" capture="environment" multiple>
+        <label>รูปใบ Cargo / Cargo Form Photos (แนบได้หลายรูป)</label>
+        <input id="cargoImages" type="file" accept="image/*" capture="environment" multiple>
+        <label>ลายเซ็น / Signature</label>
+        <canvas id="signaturePad" width="680" height="220"></canvas>
+        <div class="button-row">
+          <button id="clearSignature" type="button" class="soft">ล้าง / Clear</button>
+          <button id="completePickupBtn" type="button">จบงาน / Complete</button>
+        </div>
+      </section>
+
+      <section class="mobile-panel" id="tab-inbound">
+        <div class="bot-row">
+          <div class="bot-avatar">SL</div>
+          <div class="bubble">สแกน House และ Location ติดกัน / Scan House + Location.</div>
+        </div>
+        <label>House Number</label>
+        <input id="scanHouse" inputmode="text" autocomplete="off" value="H-1001">
+        <label>Location ID</label>
+        <input id="scanLocation" inputmode="text" autocomplete="off" value="A-01">
+        <button id="twinScanBtn" type="button">ล็อกตำแหน่ง / Lock Location</button>
+        <div id="locationList" class="mini-list"></div>
+      </section>
+
+      <section class="mobile-panel" id="tab-outbound">
+        <div class="bot-row">
+          <div class="bot-avatar">SL</div>
+          <div class="bubble">ตรวจเอกสารและบันทึก X-Ray / Validate documents and X-Ray.</div>
+        </div>
+        <label>House Number</label>
+        <input id="terminalHouse" autocomplete="off" value="H-1001">
+        <label id="lithiumDocLabel">เอกสารเพิ่มเติม / Optional document</label>
+        <input id="lithiumDoc" type="file" accept="image/*,application/pdf" capture="environment">
+        <div class="button-row">
+          <button id="validateDocBtn" type="button">ตรวจเอกสาร</button>
+          <button id="xrayPassedBtn" type="button">X-Ray ผ่าน</button>
+          <button id="rescanBtn" type="button" class="danger">Re-X-Ray</button>
+        </div>
+        <label>รูป Loading Detail</label>
+        <input id="loadingImage" type="file" accept="image/*" capture="environment">
+        <button id="loadingBtn" type="button">อัปโหลด Loading Detail</button>
+      </section>
+
+      <section class="mobile-panel" id="tab-billing">
+        <div class="bot-row">
+          <div class="bot-avatar">SL</div>
+          <div class="bubble">สร้างบิลจากงานที่พร้อม / Generate invoice for ready jobs.</div>
+        </div>
+        <label>House Number</label>
+        <input id="billingHouse" autocomplete="off" value="H-1001">
+        <button id="generateBillBtn" type="button">สร้างใบแจ้งหนี้ / Generate</button>
+        <label>Invoice ID</label>
+        <input id="invoiceId" autocomplete="off" placeholder="INV-2026-0001">
+        <button id="sendInvoiceBtn" type="button" class="soft">ส่งอีเมลวางบิล / Send Email</button>
+        <div id="billingResult" class="result"></div>
+      </section>
+
+      <section class="mobile-panel active list-panel">
+        <h2>งานล่าสุด / Recent Jobs</h2>
+        <div id="mobileJobList" class="job-list"></div>
+      </section>
+    </main>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="config.js"></script>
+    <script src="mobile.js"></script>
+  </body>
+</html>
